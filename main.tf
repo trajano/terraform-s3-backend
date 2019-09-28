@@ -50,7 +50,14 @@ resource "aws_s3_bucket" "terraform" {
   tags = {
     Name = "Terraform S3 backend bucket"
   }
+  lifecycle_rule {
+    enabled = true
 
+    transition {
+      days          = 30
+      storage_class = "ONEZONE_IA"
+    }
+  }
   versioning {
     enabled = true
   }
@@ -66,8 +73,8 @@ resource "aws_s3_bucket_public_access_block" "terraform" {
 }
 
 resource "aws_dynamodb_table" "terraform" {
-  name      = "${var.bucket}-locks"
-  hash_key  = "LockID"
+  name         = "${var.bucket}-locks"
+  hash_key     = "LockID"
   billing_mode = "PAY_PER_REQUEST"
 
   attribute {
