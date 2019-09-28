@@ -1,6 +1,6 @@
 {
   "name": "terraform-s3-backend",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "git remote add origin https://github.com/trajano/terraform-s3-backend.git",
   "main": "index.js",
   "directories": {
