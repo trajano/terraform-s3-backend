@@ -68,10 +68,8 @@ resource "aws_s3_bucket_public_access_block" "terraform" {
 resource "aws_dynamodb_table" "terraform" {
   name      = "${var.bucket}-locks"
   hash_key  = "LockID"
+  billing_mode = "PAY_PER_REQUEST"
 
-  # Not sure if this is okay or not, it may be better to use PAY_PER_REQUEST since Terraforms do not happen often.
-  read_capacity  = 20
-  write_capacity = 20
   attribute {
     name = "LockID"
     type = "S"
@@ -84,6 +82,7 @@ resource "aws_dynamodb_table" "terraform" {
 
 locals {
   usage = <<EOF
+
 terraform {
   backend "s3" {
     bucket = "${var.bucket}"
