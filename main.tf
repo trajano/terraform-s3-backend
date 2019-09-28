@@ -38,7 +38,7 @@ data "aws_iam_policy_document" "terraform" {
 
 resource "aws_iam_policy" "terraform" {
   name   = "TerraformStateFullAccess"
-  path   = "/${var.prefix}"
+  path   = var.path
   policy = "${data.aws_iam_policy_document.terraform.json}"
 }
 
